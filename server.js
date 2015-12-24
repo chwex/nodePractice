@@ -38,6 +38,6 @@ adminRouter.get('/posts', function(req,res){
 //apply the routes to our application
 app.use('/admin', adminRouter);
 
-app.listen(1337);
+app.listen(80);
 
 console.log('1337 is the magic port');
