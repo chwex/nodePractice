@@ -20,13 +20,6 @@ adminRouter.use(function(req, res, next) {
     next();
  });
 
-adminRouter.param('name', function(req, res, next, name){
-    console.log('doing name validation on '+name);
-    
-    req.name = name;
-    next();
-});
-
 //admin main page. the dashboard(http://localhost:1337/admin)
 adminRouter.get('/', function(req,res){
     res.send('I am the dashboard');
@@ -42,13 +35,22 @@ adminRouter.get('/posts', function(req,res){
     res.send('I show all the posts!');
 });
 
+adminRouter.get('/users/:name', function(req, res){
+    res.send('hello '+req.params.name+'!');
+});
+
+adminRouter.param('name', function(req, res, next, name){
+    console.log('doing name validation on '+name);
+    
+    req.name = name;
+    next();
+});
+
 adminRouter.get('/hello/:name', function(req, res){
     res.send('hello '+req.name+'!');
 });
 
-adminRouter.get('/users/:name', function(req, res){
-    res.send('hello '+req.params.name+'!');
-});
+
 
 //apply the routes to our application
 app.use('/admin', adminRouter);
