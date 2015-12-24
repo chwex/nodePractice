@@ -10,6 +10,19 @@ app.get('/', function(req, res){
 //get an instance of the router
 var adminRouter = express.Router();
 
+ // route middleware to validate :name
+ adminRouter.param('name', function(req, res, next, name) {
+    // do validation on name here
+    // blah blah validation
+    // log something so we know its working
+     console.log('doing name validations on ' + name);
+
+    // once validation is done save the new item in the req
+     req.name = name;
+    // go to the next thing
+    next();
+ });
+
 // route middleware that will happen on every request
 adminRouter.use(function(req, res, next) {
 
@@ -38,19 +51,6 @@ adminRouter.get('/posts', function(req,res){
 adminRouter.get('/users/:name', function(req, res){
     res.send('hello '+req.params.name+'!');
 });
-
- // route middleware to validate :name
- adminRouter.param('name', function(req, res, next, name) {
-    // do validation on name here
-    // blah blah validation
-    // log something so we know its working
-     console.log('doing name validations on ' + name);
-
-    // once validation is done save the new item in the req
-     req.name = name;
-    // go to the next thing
-    next();
- });
 
  // route with parameters (http://localhost:1337/admin/hello/:name)
  adminRouter.get('/hello/:name', function(req, res) {
