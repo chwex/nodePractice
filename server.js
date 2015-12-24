@@ -10,6 +10,16 @@ app.get('/', function(req, res){
 //get an instance of the router
 var adminRouter = express.Router();
 
+// route middleware that will happen on every request
+adminRouter.use(function(req, res, next) {
+
+    // log each request to the console
+    console.log(req.method, req.url);
+
+    // continue doing what we were doing and go to the route
+    next();
+ });
+
  // route middleware to validate :name
  adminRouter.param('name', function(req, res, next, name) {
     // do validation on name here
@@ -20,16 +30,6 @@ var adminRouter = express.Router();
     // once validation is done save the new item in the req
      req.name = name;
     // go to the next thing
-    next();
- });
-
-// route middleware that will happen on every request
-adminRouter.use(function(req, res, next) {
-
-    // log each request to the console
-    console.log(req.method, req.url);
-
-    // continue doing what we were doing and go to the route
     next();
  });
 
