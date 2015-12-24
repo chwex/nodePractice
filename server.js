@@ -21,7 +21,7 @@ adminRouter.use(function(req, res, next) {
  });
 
  // route middleware to validate :name
- adminRouter.param(':name', function(req, res, next, name) {
+ adminRouter.param('name', function(req, res, next, name) {
     // do validation on name here
     // blah blah validation
     // log something so we know its working
