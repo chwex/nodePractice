@@ -40,4 +40,4 @@ app.use('/admin', adminRouter);
 
 app.listen(80);
 
-console.log('1337 is the magic port');
+console.log('80 is the magic port');
