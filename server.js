@@ -21,7 +21,7 @@ adminRouter.use(function(req, res, next) {
  });
 
  // route middleware to validate :name
- adminRouter.param('name', function(req, res, next, name) {
+ adminRouter.param(':name', function(req, res, next, name) {
     // do validation on name here
     // blah blah validation
     // log something so we know its working
@@ -33,6 +33,11 @@ adminRouter.use(function(req, res, next) {
     next();
  });
 
+ // route with parameters (http://localhost:1337/admin/hello/:name)
+ adminRouter.get('/hello/:name', function(req, res) {
+     res.send('hello ' + req.name + '!');
+ });
+ 
 //admin main page. the dashboard(http://localhost:1337/admin)
 adminRouter.get('/', function(req,res){
     res.send('I am the dashboard');
@@ -51,15 +56,6 @@ adminRouter.get('/posts', function(req,res){
 adminRouter.get('/users/:name', function(req, res){
     res.send('hello '+req.params.name+'!');
 });
-
- // route with parameters (http://localhost:1337/admin/hello/:name)
- adminRouter.get('/hello/:name', function(req, res) {
-     res.send('hello ' + req.name + '!');
- });
-
-
-
-
 
 //apply the routes to our application
 app.use('/admin', adminRouter);
